@@ -1,0 +1,265 @@
+/* ==========================================================
+   CogniCompanion shared theme
+   Ported from the "Natural Tones" theme used across our
+   platforms (originally a Tailwind v4 @theme block). Converted
+   to plain CSS custom properties so this app has zero build
+   dependency on Tailwind — keeps the build simple and fast.
+   ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Fonts */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Sage green (brand core) */
+  --color-sage-50: #f4f7f5;
+  --color-sage-100: #e8ede9;
+  --color-sage-200: #cbdace;
+  --color-sage-300: #a7c1af;
+  --color-sage-400: #88a090;
+  --color-sage-500: #88a090;
+  --color-sage-600: #4a5d50;
+  --color-sage-700: #3b4b41;
+  --color-sage-800: #2c3831;
+  --color-sage-900: #1d2520;
+
+  /* Cream (backgrounds/borders) */
+  --color-cream-50: #FDFCF8;
+  --color-cream-100: #F8F9F5;
+  --color-cream-200: #E8EDE9;
+  --color-cream-300: #d7ded8;
+  --color-cream-400: #b5beb7;
+  --color-cream-500: #88a090;
+
+  /* Sky blue (secondary / caregiver accent) */
+  --color-sky-50: rgba(168, 198, 208, 0.1);
+  --color-sky-100: rgba(168, 198, 208, 0.2);
+  --color-sky-200: #A8C6D0;
+  --color-sky-500: #88a090;
+  --color-sky-600: #4a5d50;
+  --color-sky-700: #3b4b41;
+
+  /* Peach coral (highlight / celebratory accent) */
+  --color-coral-50: rgba(242, 210, 189, 0.05);
+  --color-coral-100: rgba(242, 210, 189, 0.2);
+  --color-coral-200: #F2D2BD;
+  --color-coral-500: #e09d70;
+  --color-coral-600: #c98253;
+
+  /* Semantic tokens used throughout the app */
+  --bg-page: var(--color-cream-50);
+  --bg-panel: #ffffff;
+  --bg-panel-muted: var(--color-cream-100);
+  --border-soft: var(--color-cream-200);
+  --text-primary: #2D3436;
+  --text-muted: #5b6b63;
+  --accent-primary: var(--color-sage-600);
+  --accent-primary-soft: var(--color-sage-200);
+  --accent-secondary: var(--color-sky-200);
+  --accent-highlight: var(--color-coral-200);
+  --accent-highlight-strong: var(--color-coral-500);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --shadow-soft: 0 4px 16px rgba(74, 93, 80, 0.08);
+  --shadow-card: 0 2px 10px rgba(45, 52, 54, 0.06);
+}
+
+/* ==========================================================
+   Base
+   ========================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background-color: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body ::selection {
+  background-color: var(--color-cream-200);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  margin: 0;
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.6;
+}
+
+button {
+  font-family: inherit;
+}
+
+a {
+  color: var(--accent-primary);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--color-cream-100);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-sage-300);
+  border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-sage-400);
+}
+
+/* Focus visibility (accessibility floor) */
+:focus-visible {
+  outline: 3px solid var(--color-sky-200);
+  outline-offset: 2px;
+}
+
+/* ==========================================================
+   Motion
+   ========================================================== */
+.pulsater {
+  animation: gentlePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(136, 160, 144, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px 8px rgba(136, 160, 144, 0.15);
+  }
+}
+
+@keyframes scaleUp {
+  0% { transform: scale(0.94); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-scale-up {
+  animation: scaleUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes breatheCycle {
+  0% { transform: scale(0.7); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(0.7); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulsater, .animate-scale-up, [data-breathing] {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================
+   Accessibility utilities (carried over from the shared theme)
+   ========================================================== */
+
+/* Adjustable text sizes */
+.text-size-large { font-size: 1.15rem; }
+.text-size-large h1 { font-size: 2.25rem !important; }
+.text-size-large h2 { font-size: 1.8rem !important; }
+.text-size-large h3 { font-size: 1.5rem !important; }
+.text-size-large p { font-size: 1.2rem !important; line-height: 1.8rem !important; }
+.text-size-large span, .text-size-large button, .text-size-large label,
+.text-size-large a, .text-size-large li, .text-size-large input, .text-size-large textarea {
+  font-size: 1.1rem !important;
+}
+
+.text-size-extra-large { font-size: 1.35rem; }
+.text-size-extra-large h1 { font-size: 2.75rem !important; }
+.text-size-extra-large h2 { font-size: 2.25rem !important; }
+.text-size-extra-large h3 { font-size: 1.85rem !important; }
+.text-size-extra-large p { font-size: 1.45rem !important; line-height: 2.1rem !important; }
+.text-size-extra-large span, .text-size-extra-large button, .text-size-extra-large label,
+.text-size-extra-large a, .text-size-extra-large li, .text-size-extra-large input, .text-size-extra-large textarea {
+  font-size: 1.3rem !important;
+}
+
+/* High contrast theme override */
+.theme-high-contrast {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  background-image: none !important;
+}
+.theme-high-contrast, .theme-high-contrast * {
+  border-color: #ffffff !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+.theme-high-contrast header, .theme-high-contrast footer, .theme-high-contrast main,
+.theme-high-contrast div, .theme-high-contrast section, .theme-high-contrast article,
+.theme-high-contrast aside, .theme-high-contrast nav {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  background-image: none !important;
+}
+.theme-high-contrast p, .theme-high-contrast span, .theme-high-contrast h1,
+.theme-high-contrast h2, .theme-high-contrast h3, .theme-high-contrast h4,
+.theme-high-contrast label, .theme-high-contrast li, .theme-high-contrast a,
+.theme-high-contrast strong, .theme-high-contrast em, .theme-high-contrast svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+.theme-high-contrast button, .theme-high-contrast select,
+.theme-high-contrast input, .theme-high-contrast textarea {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 4px !important;
+}
+.theme-high-contrast button:hover, .theme-high-contrast button:focus {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+}
+.theme-high-contrast button:hover *, .theme-high-contrast button:focus * {
+  color: #000000 !important;
+}
+
+/* Large touch targets */
+.large-touch-targets button, .large-touch-targets [role="button"], .large-touch-targets a,
+.large-touch-targets select, .large-touch-targets input[type="button"], .large-touch-targets input[type="submit"] {
+  min-height: 48px !important;
+  min-width: 48px !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+}
+.large-touch-targets input, .large-touch-targets textarea, .large-touch-targets select {
+  min-height: 48px !important;
+}
+.large-touch-targets .flex, .large-touch-targets .grid {
+  gap: 1.25rem !important;
+}
