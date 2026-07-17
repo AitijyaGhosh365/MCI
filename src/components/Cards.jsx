@@ -4,7 +4,7 @@ export function FeatureCard({ icon, tone = 'sage', title, description, cta = 'Op
   return (
     <button className="feature-card" onClick={onClick}>
       <span className={`icon-badge ${tone}`} aria-hidden="true">{icon}</span>
-      <h3>{title}</h3>
+      <h3> {title}</h3>
       <p>{description}</p>
       <span className="card-cta">{cta} →</span>
     </button>
